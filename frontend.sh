@@ -1,6 +1,6 @@
 script_location=$(pwd)
 
-yum install nginx -yum
+yum install nginx -y
 systemctl enable nginx
 systemctl start nginx
 rm -rf /usr/share/nginx/html/*
