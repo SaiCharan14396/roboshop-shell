@@ -3,7 +3,7 @@
 ##### Change these values ###
 ZONE_ID="Z001631020W3VK3MZG39B"
 DOMAIN="saicharane.online"
-SG_NAME="allow-all"
+SG_NAME="allow_all"
 env=dev
 #############################
 
