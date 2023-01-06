@@ -10,7 +10,7 @@ else
 fi
 
 echo -e "\e[35m install nodejs\e[0m"
-yum install nodejs -y
+yum install nodejs -y &>>${LOG}
 if [ $? -eq 0 ]; then
   echo success
 else
@@ -108,7 +108,7 @@ else
   echo failure
 fi
 
-echo -e "\e[35m loa schema\e[0m"
+echo -e "\e[35m load schema\e[0m"
 mongo --host mongodb-dev.saicharane.online </app/schema/catalogue.js &>>${LOG}
 if [ $? -eq 0 ]; then
   echo success
