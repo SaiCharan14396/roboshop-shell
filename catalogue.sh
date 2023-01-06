@@ -5,7 +5,8 @@ status_check() {
  if [ $? -eq 0 ]; then
    echo success
  else
-   echo failure
+   echo -e "\e[31mFAILURE\e[0m"
+   echo "refer lof file for more info. LOG FILE PATH : ${LOG}"
    exit
  fi
 }
