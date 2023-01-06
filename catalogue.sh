@@ -1,63 +1,66 @@
 source common.sh
 
-echo -e "\e[35m configuring nodejs repos\e[0m"
+print_head "configuring nodejs repos"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 status_check
 
-echo -e "\e[35m install nodejs\e[0m"
+print_head "install nodejs"
 yum install nodejs -y &>>${LOG}
 status_check
 
-echo -e "\e[35m add application user\e[0m"
-useradd roboshop &>>${LOG}
+print_head "add application user"
+id roboshop &>>${LOG}
+if [ $? -ne 0]
+     useradd roboshop &>>${LOG}
+fi
 status_check
 
-echo -e "\e[35m create a new directory\e[0m"
+print_head "create a new directory"
 mkdir -p /app &>>${LOG}
 status_check
 
-echo -e "\e[35m downloading app content\e[0m"
+print_head "downloading app content"
 curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
 status_check
 
-echo -e "\e[35m clean old content\e[0m"
+print_head "clean old content"
 rm -rf /app/* &>>${LOG}
 status_check
 
-echo -e "\e[35m extracting app content\e[0m"
+print_head "extracting app content"
 cd /app
 unzip /tmp/catalogue.zip &>>${LOG}
 status_check
 
-echo -e "\e[35m installing nodejs dependencies\e[0m"
+print_head "installing nodejs dependencies"
 cd /app
 npm install &>>${LOG}
 status_check
 
-echo -e "\e[35m configuring catalogue service file\e[0m"
+print_head "configuring catalogue service file"
 cp  ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${LOG}
 status_check
 
-echo -e "\e[35m reload systemd\e[0m"
+print_head "reload systemd"
 systemctl daemon-reload &>>${LOG}
 status_check
 
-echo -e "\e[35m enable catalogue service\e[0m"
+print_head "enable catalogue service"
 systemctl enable catalogue &>>${LOG}
 status_check
 
-echo -e "\e[35m start catalogue service\e[0m"
+print_head "start catalogue service"
 systemctl start catalogue &>>${LOG}
 status_check
 
-echo -e "\e[35m configuring mongo repo\e[0m"
+print_head "configuring mongo repo"
 cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
 status_check
 
-echo -e "\e[35m install mongo client\e[0m"
+print_head "install mongo client"
 yum install mongodb-org-shell -y &>>${LOG}
 status_check
 
-echo -e "\e[35m load schema\e[0m"
+print_head "load schema"
 mongo --host mongodb-dev.saicharane.online </app/schema/catalogue.js &>>${LOG}
 status_check
