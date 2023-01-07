@@ -13,7 +13,7 @@ yum install redis -y  &>>${LOG}
 status_check
 
 print_head "update redis listener address"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>>${LOG}
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf &>>${LOG}
 status_check
 
 #systemctl operations
