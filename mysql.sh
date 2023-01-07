@@ -9,21 +9,21 @@ print_head "disable mysql default module"
 dnf module disable mysql -y &>>${LOG}
 status_check
 
+print_head "copy mysql repo file"
+cp ${script_location}/files/mysql.repo /etc/yum.repos.d/mysql.repo &>>${LOG}
+status_check
+
 print_head "install mysql server"
 yum install mysql-community-server -y &>>${LOG}
 status_check
 
-print_head "copy mysql repo file"
-cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mysql.repo &>>${LOG}
-status_check
-
 #systemctl operations
 print_head "enable mysql server"
-systemctl enable mongod &>>${LOG}
+systemctl enable mysqld &>>${LOG}
 status_check
 
 print_head "restart mysql server"
-systemctl restart mongod &>>${LOG}
+systemctl restart mysqld &>>${LOG}
 status_check
 
 print_head "setup default database password"
