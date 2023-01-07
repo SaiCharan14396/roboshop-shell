@@ -1,6 +1,6 @@
 source common.sh
 
-if[ -Z "${root_mysql_password}" ]; then
+if [ -Z "${root_mysql_password}" ]; then
   echo "variable root_mysql_password is needed"
   exit
 fi
