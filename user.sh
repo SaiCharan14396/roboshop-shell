@@ -1,5 +1,5 @@
 source common.sh
 
-component=catalogue
+component=user
 
 NODEJS
