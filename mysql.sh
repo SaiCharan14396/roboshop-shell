@@ -6,7 +6,7 @@ if [ -z "${root_mysql_password}" ]; then
 fi
 
 print_head "disable mysql default module"
-dnf module disable mysql -y
+dnf module disable mysql -y &>>${LOG}
 status_check
 
 print_head "copy mysql repo file"
