@@ -141,3 +141,27 @@ SYSTEMD_SETUP
 LOAD_SCHEMA
 
 }
+
+PYTHON() {
+
+print_head "install python"
+yum install python36 gcc python3-devel -y &>>${LOG}
+status_check
+
+APP_PREREQ
+
+print_head "download dependencies"
+cd /app
+pip3.6 install -r requirements.txt &>>${LOG}
+status_check
+
+print_head "update password in service file"
+sed -i -e "s//${roboshop_rabbitmq_password}/" files/${component}.service
+status_check
+
+
+SYSTEMD_SETUP
+
+LOAD_SCHEMA
+
+}
