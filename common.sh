@@ -156,7 +156,7 @@ pip3.6 install -r requirements.txt &>>${LOG}
 status_check
 
 print_head "update password in service file"
-sed -i -e "s//${roboshop_rabbitmq_password}/" ${script_location}/files/${component}.service &>>${LOG}
+sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" ${script_location}/files/${component}.service &>>${LOG}
 status_check
 
 
